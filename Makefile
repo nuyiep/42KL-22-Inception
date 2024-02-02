@@ -6,11 +6,11 @@
 #    By: plau <plau@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 18:12:36 by plau              #+#    #+#              #
-#    Updated: 2024/01/29 18:12:37 by plau             ###   ########.fr        #
+#    Updated: 2024/02/02 13:30:26 by plau             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DC		=	sudo docker compose -f
+DC		=	docker compose -f
 YAML	=	./srcs/docker-compose.yml
 
 all:
@@ -20,14 +20,14 @@ clean:
 		$(DC) $(YAML) down
 
 fclean:
-		sudo docker stop $$(sudo docker ps -qa); sudo docker rm $$(sudo docker ps -qa); sudo docker rmi -f $$(sudo docker images -qa);
+		docker stop $$(docker ps -qa); docker rm $$(docker ps -qa); docker rmi -f $$(docker images -qa);
 
 re:
-		sudo make fclean; sudo make all
+		make fclean; make all
 
 .PHONY:	all clean fclean re
 
 
-# sudo docker volume rm $$(sudo docker volume ls -q); sudo docker network rm $$(sudo docker network ls -q)
-# sudo docker stop $(sudo docker ps -aq); sudo docker rm $(sudo docker ps -aq); sudo docker rmi $(sudo docker images -q);
-# sudo docker compose up
+# docker volume rm $$(docker volume ls -q); docker network rm $$(docker network ls -q)
+# docker stop $(docker ps -aq); docker rm $(docker ps -aq); docker rmi $(docker images -q);
+# docker compose up
