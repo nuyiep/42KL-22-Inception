@@ -41,10 +41,26 @@ ____
         -   Remove Docker images
         -   -f force forcibly remove
         -   if no -f, Docker will not delete an image if it is being used by one or more containers, and it will display an error message indicating that the image is in use
+  
+    7.  $(docker network ls -q) 2>/dev/null
+        -   2>/dev/null
+            -   Redirects standard error (stderr) to /dev/null
+            -   /dev/null is a special device file that discards data written to it
 
+___
+
+### Docker v docker-compose work
+    - Docker-compose os built on top of Docker engine
 ___
 
 ### Useful commands
 
     -   Add user to docker group
         sudo usermod -aG docker $USER
+___
+
+### Nginx Dockerfile
+
+    -   Use to build a Docker image for an nginx web server with SSL support
+    -   FROM debian:buster
+        -   spe
