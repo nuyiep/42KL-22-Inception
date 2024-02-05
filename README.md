@@ -49,8 +49,16 @@ ____
 
 ___
 
-### Docker v docker-compose work
-    - Docker-compose os built on top of Docker engine
+### Docker v docker-compose
+    - Docker
+      - Containerization Engine
+        - A containerization platform that provides tools for building, running and managing containers. 
+        - Includes the Docker Engine, which is responsible for building, running, and managing containers
+      - Single Container Management
+    - Docker compose
+      - Application orchestration
+        - A tool for defining and running multi-container Docker applications
+        - Allows you to define the services, networks, volumes, and other configurations for a multi-container application in a single YAML file (docker-compose.yml)
 ___
 
 ### Useful commands
