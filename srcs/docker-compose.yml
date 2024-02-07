@@ -4,8 +4,10 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx
+    env_file:
+      - .env
     ports:
-      - 443:443
+      - ${NGINX_PORT}:443
     networks:
       - network
 

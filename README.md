@@ -77,8 +77,7 @@ ___
     -   Add user to docker group
         sudo usermod -aG docker $USER
 
-    -   ps -ef | grep nginx 
-        check nginx status
+
 ___
 
 ### Nginx
@@ -110,8 +109,12 @@ ___
 
 ### Cool commands
 
-    - apt-get install -y htop
-    - htop
-      - system monitor
-    - su 
-      - go to root
+-   apt-get install -y htop
+-   htop
+    - system monitor
+-   su 
+    - go to root
+-   ps -ef | grep nginx 
+    -   check nginx status
+-   sudo lsof -i:443
+    -   list all open files/network sockets associated with the specified port
