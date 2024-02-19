@@ -83,7 +83,6 @@ ___
     -   Add user to docker group
         sudo usermod -aG docker $USER
 
-
 ___
 
 ### Nginx
@@ -102,7 +101,13 @@ ___
         Tell Nginx to run in the foreground (not as a daemon). Useful for debugging purposes or when you want to run Nginx without detaching it from the current terminal session. By default, Nginx runs as a daemon in the background, meaning it starts as a separate process and continues to run even after you close the terminal session.     
 ___
 
-### Docker v VM
+### Docker v Virtual Machines
+
+    Virtual Machines
+    -   Has it's own full operating system & typically slower
+
+    Containers
+    -   Share the host's operating system & typically quicker
 
     Virtual Machine
     -   VMware
@@ -124,6 +129,23 @@ ___
         check nginx status
     -   sudo lsof -i:443
         list all open files/network sockets associated with the specified port
-    -   
+  
 ____
 
+### WordPress
+
+    -   Running WordPress involves installing a LAMP or LEMP
+    -   LAMP - Linux, Apache, MySQL, PHP
+    -   LEMP - Linux, Nginx,  MySQL, PHP 
+    -   Using Docker & Docker Compose, you can streamline the process
+
+___
+
+### Entrypoint v CMD
+
+    -   Entrypoint
+        -   Set the primary command
+    -   CMD
+        -   Define the command to be run if Entrypoint is not specified
+    -   If a Dockerfile includes both Entrypoint and CMD, 
+        the CMD values are passed as arguments to the Entrypoint
