@@ -149,3 +149,12 @@ ___
         -   Define the command to be run if Entrypoint is not specified
     -   If a Dockerfile includes both Entrypoint and CMD, 
         the CMD values are passed as arguments to the Entrypoint
+
+### Volumes
+    -   Need it so that the next time you don't have to create your WordPress account again
+    -   Need to place it under nginx because
+        -   Nginx serves static files (e.g. images, CSS, JavaScript)
+            and proxying requests to the wordpress service
+        -   Optimize the performance of static file serving
+        -   Reduce overhead and improve response time
+    - 

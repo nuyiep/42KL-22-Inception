@@ -3,13 +3,44 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    build: ./requirements/nginx
+    build: ./requirements/nginx #build a custom Docker image for the service
     env_file:
       - .env
     ports:
       - ${NGINX_PORT}:443
     networks:
       - network
+    depends_on:
+      - wordpress
+    volumes:
+      - ./wordpress:/var/www/html:delegated
+      #volume to be mounted as delegated v read-on
+      #delegated- changes made to files on the host are reflected inside the container
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    ports:
+      - ${WORDPRESS_PORT}:9000
+    networks:
+      - network
+    environment:
+      - WORDPRESS_DB_HOST=db:3306 #default for mysql
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+    depends_on:
+      - mariadb
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    networks:
+      - network    
 
 networks:
   network:
