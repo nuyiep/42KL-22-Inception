@@ -10,10 +10,11 @@ services:
       - ${NGINX_PORT}:443
     networks:
       - network
+    restart: always
     depends_on:
       - wordpress
     volumes:
-      - ./wordpress:/var/www/html:delegated
+      - wordpress_files:/var/www/html:delegated
       #volume to be mounted as delegated v read-on
       #delegated- changes made to files on the host are reflected inside the container
 
@@ -26,13 +27,16 @@ services:
       - ${WORDPRESS_PORT}:9000
     networks:
       - network
+    restart: always
     environment:
       - WORDPRESS_DB_HOST=db:3306 #default for mysql
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_NAME=$MYSQL_DATABASE
     depends_on:
       - mariadb
+    volumes:
+      - wordpress_files:/var/www/html:delegated
 
   mariadb:
     container_name: mariadb
@@ -40,8 +44,30 @@ services:
     env_file:
       - .env
     networks:
-      - network    
+      - network
+    restart: always
+    volumes:
+      - wordpress_database:/var/www/mysql:ro
 
+# Volume definition
+volumes:
+  wordpress_database:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/plau/data/wordpress_db
+      o: bind
+      # specifies mount options for the volume
+      # volume is mounted as a bind mount,
+      # where the source directory on the host is directly mounted into the container
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/plau/data/wordpress_files
+      o: bind
+
+# Docker-network that establishes the connection between containers
 networks:
   network:
     driver: bridge
