@@ -156,5 +156,4 @@ ___
         -   Nginx serves static files (e.g. images, CSS, JavaScript)
             and proxying requests to the wordpress service
         -   Optimize the performance of static file serving
-        -   Reduce overhead and improve response time
-    - 
+        -   Reduce overhead and improve response time 

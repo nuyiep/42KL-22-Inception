@@ -5,8 +5,6 @@ services:
     container_name: nginx
     build: ./requirements/nginx #build a custom Docker image for the service
     restart: always
-    env_file:
-      - .env
     ports:
       - ${NGINX_PORT}:443
     networks:
@@ -26,26 +24,25 @@ services:
     networks:
       - inception
     restart: always
-    # environment:
-    #   - WORDPRESS_DB_HOST=db:3306 #default for mysql
-    #   - WORDPRESS_DB_USER=$MYSQL_USER
-    #   - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-    #   - WORDPRESS_DB_NAME=$MYSQL_DATABASE
-    # depends_on:
-    #   - mariadb
+    depends_on:
+      - mariadb
     volumes:
       - wp_website:/var/www/html
 
-  # mariadb:
-  #   container_name: mariadb
-  #   build: ./requirements/mariadb
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - inception
-  #   restart: always
-  #   volumes:
-  #     - wordpress_database:/var/www/mysql:ro
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:3306
+    networks:
+      - inception
+    restart: always
+    volumes:
+      - wp_data:/var/lib/mysql
+      # create a Docker volume wp_data and 
+      # mount it at the /var/lib/mysql
 
 # Volume definition
 volumes:

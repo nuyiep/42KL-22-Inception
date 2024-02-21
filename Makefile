@@ -6,7 +6,7 @@
 #    By: plau <plau@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 18:12:36 by plau              #+#    #+#              #
-#    Updated: 2024/02/06 18:59:15 by plau             ###   ########.fr        #
+#    Updated: 2024/02/21 20:13:42 by plau             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ all:
 		$(DC) $(YAML) up -d --build
 
 clean:
-		$(DC) $(YAML) down
+		$(DC) $(YAML) down --rmi all --volumes --remove-orphans
 
 fclean:
 		docker stop $$(docker ps -qa); docker rm $$(docker ps -qa); docker rmi -f $$(docker images -qa);
