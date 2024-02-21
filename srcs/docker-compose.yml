@@ -4,19 +4,17 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx #build a custom Docker image for the service
+    restart: always
     env_file:
       - .env
     ports:
       - ${NGINX_PORT}:443
     networks:
-      - network
-    restart: always
+      - inception
     depends_on:
       - wordpress
     volumes:
-      - wordpress_files:/var/www/html:delegated
-      #volume to be mounted as delegated v read-on
-      #delegated- changes made to files on the host are reflected inside the container
+      - wp_website:/var/www/html
 
   wordpress:
     container_name: wordpress
@@ -26,48 +24,48 @@ services:
     ports:
       - ${WORDPRESS_PORT}:9000
     networks:
-      - network
+      - inception
     restart: always
-    environment:
-      - WORDPRESS_DB_HOST=db:3306 #default for mysql
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=$MYSQL_DATABASE
-    depends_on:
-      - mariadb
+    # environment:
+    #   - WORDPRESS_DB_HOST=db:3306 #default for mysql
+    #   - WORDPRESS_DB_USER=$MYSQL_USER
+    #   - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+    #   - WORDPRESS_DB_NAME=$MYSQL_DATABASE
+    # depends_on:
+    #   - mariadb
     volumes:
-      - wordpress_files:/var/www/html:delegated
+      - wp_website:/var/www/html
 
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariadb
-    env_file:
-      - .env
-    networks:
-      - network
-    restart: always
-    volumes:
-      - wordpress_database:/var/www/mysql:ro
+  # mariadb:
+  #   container_name: mariadb
+  #   build: ./requirements/mariadb
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - inception
+  #   restart: always
+  #   volumes:
+  #     - wordpress_database:/var/www/mysql:ro
 
 # Volume definition
 volumes:
-  wordpress_database:
+  wp_website:
     driver: local
     driver_opts:
       type: none
-      device: /home/plau/data/wordpress_db
+      device: /home/plau/data/wp_website
       o: bind
       # specifies mount options for the volume
       # volume is mounted as a bind mount,
       # where the source directory on the host is directly mounted into the container
-  wordpress_files:
+  wp_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/plau/data/wordpress_files
+      device: /home/plau/data/wp_data
       o: bind
 
 # Docker-network that establishes the connection between containers
 networks:
-  network:
+  inception:
     driver: bridge
