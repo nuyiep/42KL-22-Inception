@@ -98,7 +98,12 @@ ___
         Set global configuration directives at runtime
         
         Daemon off
-        Tell Nginx to run in the foreground (not as a daemon). Useful for debugging purposes or when you want to run Nginx without detaching it from the current terminal session. By default, Nginx runs as a daemon in the background, meaning it starts as a separate process and continues to run even after you close the terminal session.     
+        Tell Nginx to run in the foreground (not as a daemon). Useful for debugging purposes or when you want to run Nginx without detaching it from the current terminal session. By default, Nginx runs as a daemon in the background, meaning it starts as a separate process and continues to run even after you close the terminal session.
+
+    -   Fast CGI (Common Gateway Interface)
+        * An interface between the server and database
+        * Provide dynamic content to the user
+
 ___
 
 ### Docker v Virtual Machines
@@ -157,3 +162,9 @@ ___
             and proxying requests to the wordpress service
         -   Optimize the performance of static file serving
         -   Reduce overhead and improve response time 
+
+### Dynamic v static website
+    -   Dynamic 
+        -   Will update based on your request
+    -   Static
+        -   Direct HTML
