@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx #build a custom Docker image for the service
+    restart: always
+    ports:
+      - ${NGINX_PORT}:443
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_website:/var/www/html
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    ports:
+      - ${WORDPRESS_PORT}:9000
+    networks:
+      - inception
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_website:/var/www/html
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:3306
+    networks:
+      - inception
+    restart: always
+    volumes:
+      - wp_data:/var/lib/mysql
+      # create a Docker volume wp_data and 
+      # mount it at the /var/lib/mysql
+
+# Volume definition
+volumes:
+  wp_website:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/plau/data/wp_website
+      o: bind
+      # specifies mount options for the volume
+      # volume is mounted as a bind mount,
+      # where the source directory on the host is directly mounted into the container
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/plau/data/wp_data
+      o: bind
+
+# Docker-network that establishes the connection between containers
+networks:
+  inception:
+    driver: bridge
