@@ -44,6 +44,15 @@ services:
       # create a Docker volume wp_data and 
       # mount it at the /var/lib/mysql
 
+  static:
+    container_name: static
+    build: ./requirements/bonus/static
+    restart: always
+    ports:
+      - 1234:1234
+    networks:
+      - inception
+
 # Volume definition
 volumes:
   wp_website:
