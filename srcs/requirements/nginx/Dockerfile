@@ -10,3 +10,4 @@ RUN     mkdir -p /etc/nginx/ssl && openssl req -x509 -nodes -days 365 -newkey rs
 
 EXPOSE	443
 CMD     ["nginx", "-g", "daemon off;"]
+ 

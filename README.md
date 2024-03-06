@@ -177,5 +177,8 @@ ___
     -   Configuration Snippets (*.conf files in .d directories)
         -   Often named "conf.d", "sites-available"
 
+### Cadvisor
+    -   A running daemon that collects, aggregates, processes, and exports information about running containers
+
 ### Reference
     https://github.com/vbachele/Inception/blob/main/README.md#MARIADB
