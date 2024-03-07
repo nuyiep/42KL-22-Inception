@@ -180,5 +180,8 @@ ___
 ### Cadvisor
     -   A running daemon that collects, aggregates, processes, and exports information about running containers
 
+### Redis
+    -   Remote Dictionary Server
+
 ### Reference
     https://github.com/vbachele/Inception/blob/main/README.md#MARIADB

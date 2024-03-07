@@ -1,13 +1,12 @@
-
 FROM        debian:buster
 RUN         apt-get update && apt-get install -y \
             wget \
             curl \
             bash \
-            php \
+            php7.3 \
             php-cgi \
             php-mysql \
-            php-fpm \
+            php7.3-fpm \
             php-pdo \
             php-gd \
             php-cli \
