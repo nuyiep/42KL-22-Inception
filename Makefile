@@ -32,7 +32,7 @@ fclean:
 		docker rm $$(docker ps -qa); \
 		docker rmi -f $$(docker images -qa); \
 		docker volume rm $$(docker volume ls -q); \
-		docker network rm $$(docker network ls -q); \
+		docker network ls -q | grep -v -E 'bridge|host|none' | xargs -r docker network rm; \
 		${RMRF} ~/data/wp_data/*; \
 		${RMRF} ~/data/wp_website/*
 

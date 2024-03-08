@@ -62,6 +62,23 @@ ____
         -   2>/dev/null
             -   Redirects standard error (stderr) to /dev/null
             -   /dev/null is a special device file that discards data written to it
+  
+    8. docker network rm $$(docker network ls -q)
+        -   Cannot remove pre-defined networks (bridge, host, none), will cause error
+        -   To fix this, use docker network ls -q | grep -v -E 'bridge|host|none' | xargs -r docker network rm
+  
+    9. docker network ls -q | grep -v -E 'bridge|host|none' | xargs -r docker network rm
+        -   -v inverts the match
+        -   -E enables extended regular expressions (use of |)
+            -   E.g.
+                    apple
+                    banana
+                    cherry
+                grep 'apple\|banana' example.txt
+                grep -E 'apple|banana' example.txt
+        -   xargs builds and execute command lines from standard input for each input item
+        -   -r prevents 'xargs' from running the specified command if there are no input items
+
 
 ___
 
@@ -177,6 +194,12 @@ ___
     -   Configuration Snippets (*.conf files in .d directories)
         -   Often named "conf.d", "sites-available"
 
+______
+
+###
+_____
+
+### Bonus
 ### Cadvisor
     -   A running daemon that collects, aggregates, processes, and exports information about running containers
 
