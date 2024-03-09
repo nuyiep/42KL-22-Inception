@@ -127,9 +127,11 @@ ___
 
     Virtual Machines
     -   Has it's own full operating system & typically slower
+    -   Use hardware resources
 
-    Containers
+    Docker (Containers)
     -   Share the host's operating system & typically quicker
+    -   Use OS resources
 
     Virtual Machine
     -   VMware
@@ -196,7 +198,13 @@ ___
 
 ______
 
-###
+### Mariadb login commands
+
+    -   docker exec -it mariadb bash
+    -   mysql -u plau -p wordpress
+        -   mysql -u (user) -p (database name)
+    -   SHOW TABLES; (All mysql commands must include ;)
+    -   Select * FROM wp_comments
 _____
 
 ### Bonus
